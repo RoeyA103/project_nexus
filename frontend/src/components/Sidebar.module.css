@@ -1,0 +1,9 @@
+.sidebar { width: 210px; flex-shrink: 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 0.8rem; }
+.card h3 { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; cursor: pointer; font-size: 0.87rem; color: var(--muted); transition: color 0.15s; }
+.item:hover { color: var(--text); }
+.item input { accent-color: var(--accent); cursor: pointer; }
+.priceRow { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
+.priceRow input { flex: 1; width: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 0.35rem 0.5rem; color: var(--text); font-size: 0.82rem; outline: none; text-align: center; }
+.priceRow input:focus { border-color: var(--accent); }
