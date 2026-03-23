@@ -1,31 +1,35 @@
 import React from 'react'
-import styles from './ProductCard.module.css'
-import { randIP } from '../hooks/useLogger'
+import s from './ProductCard.module.css'
 
-export default function ProductCard({ product, addLog, onAddCart }) {
+export default function ProductCard({ product, log, onAddCart }) {
   function handleView() {
-    addLog('info', 'product_view', randIP(), 'guest',
-      { product_id: product.id, product_name: product.name, price: product.price },
-      `Product viewed: ${product.name}`)
+    log('product_view', 'success', 'guest', {
+      product_id: product.id,
+      product_name: product.name,
+      price: product.price,
+      category: product.cat,
+    })
   }
 
   function handleAdd(e) {
     e.stopPropagation()
     onAddCart(product)
-    addLog('info', 'add_to_cart', randIP(), 'guest',
-      { product_id: product.id, product_name: product.name, price: product.price },
-      `Added to cart: ${product.name}`)
+    log('add_to_cart', 'success', 'guest', {
+      product_id: product.id,
+      product_name: product.name,
+      price: product.price,
+    })
   }
 
   return (
-    <div className={styles.card} onClick={handleView}>
-      <div className={styles.img}>{product.emoji}</div>
-      <div className={styles.body}>
-        <div className={styles.name}>{product.name}</div>
-        <div className={styles.cat}>{product.cat}</div>
-        <div className={styles.footer}>
-          <span className={styles.price}>₪{product.price.toLocaleString()}</span>
-          <button className={styles.addBtn} onClick={handleAdd}>+ עגלה</button>
+    <div className={s.card} onClick={handleView}>
+      <div className={s.img}>{product.emoji}</div>
+      <div className={s.body}>
+        <div className={s.name}>{product.name}</div>
+        <div className={s.cat}>{product.cat}</div>
+        <div className={s.footer}>
+          <span className={s.price}>₪{product.price.toLocaleString()}</span>
+          <button className={s.btn} onClick={handleAdd}>+ עגלה</button>
         </div>
       </div>
     </div>

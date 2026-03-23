@@ -1,14 +1,12 @@
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; }
 .modal { background: var(--surface); border: 2px solid var(--text); border-radius: 10px; padding: 1.8rem; width: 340px; max-width: 90vw; }
 .head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem; }
-.head h2 { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
-.close { background: none; border: none; font-size: 1.1rem; color: var(--muted); transition: color 0.15s; }
+.head h2 { font-size: 1.2rem; font-weight: 900; }
+.close { background: none; border: none; font-size: 1.1rem; color: var(--muted); }
 .close:hover { color: var(--text); }
 .field { margin-bottom: 0.9rem; }
 .field label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
-.field input { width: 100%; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 5px; padding: 0.65rem 0.8rem; color: var(--text); font-size: 0.9rem; outline: none; direction: ltr; transition: border-color 0.15s; }
+.field input { width: 100%; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 5px; padding: 0.65rem 0.8rem; color: var(--text); font-size: 0.9rem; outline: none; direction: ltr; }
 .field input:focus { border-color: var(--accent); }
-.field input.danger { border-color: var(--danger) !important; background: #fff5f5; }
-.warning { background: #fff5f5; border: 1px solid var(--danger); border-radius: 5px; padding: 0.5rem 0.7rem; font-size: 0.78rem; color: var(--danger); margin-bottom: 0.7rem; font-weight: 500; }
 .submit { width: 100%; padding: 0.75rem; background: var(--text); color: #fff; border: none; border-radius: 5px; font-size: 0.95rem; font-weight: 700; transition: background 0.2s; }
 .submit:hover { background: var(--accent); }

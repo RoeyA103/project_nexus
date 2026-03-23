@@ -1,23 +1,8 @@
-.nav {
-  background: var(--surface);
-  border-bottom: 2px solid var(--text);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+.nav { background: var(--surface); border-bottom: 2px solid var(--text); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
 .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -2px; color: var(--text); }
 .logo em { color: var(--accent); font-style: normal; }
 .links { display: flex; gap: 1.5rem; align-items: center; }
 .links a { color: var(--muted); font-size: 0.88rem; font-weight: 500; transition: color 0.15s; }
 .links a:hover { color: var(--text); }
-.cartBtn {
-  background: var(--text); color: #fff; border: none;
-  padding: 0.45rem 1rem; border-radius: 4px;
-  font-size: 0.85rem; font-weight: 700; transition: background 0.2s;
-}
-.cartBtn:hover { background: var(--accent); }
+.cart { background: var(--text); color: #fff; border: none; padding: 0.45rem 1rem; border-radius: 4px; font-size: 0.85rem; font-weight: 700; transition: background 0.2s; }
+.cart:hover { background: var(--accent); }
