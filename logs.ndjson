@@ -1,0 +1,21 @@
+{"timestamp":"2026-03-23T12:33:44.252Z","event":"page_view","user":"guest","status":"success","ip":"::1","details":{"page":"home"}}
+{"timestamp":"2026-03-23T12:33:51.259Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":10,"product_name":"ג'ינס Levi's 501","price":399}}
+{"timestamp":"2026-03-23T12:43:41.903Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":4,"product_name":"כדור כדורסל Spalding","price":149}}
+{"timestamp":"2026-03-23T12:43:47.313Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":5,"product_name":"מצלמה Fujifilm X-T5","price":5800}}
+{"timestamp":"2026-03-23T12:43:54.198Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":8,"product_name":"שעון חכם Samsung Galaxy","price":899}}
+{"timestamp":"2026-03-23T12:43:55.608Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":9,"product_name":"מנורת שולחן LED","price":129}}
+{"timestamp":"2026-03-23T12:43:56.485Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":10,"product_name":"ג'ינס Levi's 501","price":399}}
+{"timestamp":"2026-03-23T12:43:58.741Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":2,"product_name":"נעלי Nike Air Max 270","price":599}}
+{"timestamp":"2026-03-23T12:43:59.526Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":1,"product_name":"אוזניות Sony WH-1000XM5","price":1299}}
+{"timestamp":"2026-03-23T12:44:00.375Z","event":"add_to_cart","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499}}
+{"timestamp":"2026-03-23T12:44:01.717Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:02.282Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:02.707Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:03.179Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:03.699Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:04.211Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:04.671Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:05.132Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:06.955Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":3,"product_name":"מחשב נייד ASUS VivoBook","price":3499,"category":"אלקטרוניקה"}}
+{"timestamp":"2026-03-23T12:44:10.638Z","event":"sort_changed","user":"guest","status":"success","ip":"::1","details":{"sort_by":"מחיר: גבוה לנמוך"}}
+{"timestamp":"2026-03-23T12:45:10.898Z","event":"product_view","user":"guest","status":"success","ip":"::1","details":{"product_id":9,"product_name":"מנורת שולחן LED","price":129,"category":"בית"}}
