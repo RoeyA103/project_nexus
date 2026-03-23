@@ -1,0 +1,221 @@
+[
+  {
+    "timestamp": "2026-03-23T07:11:03.277Z",
+    "event": "page_view",
+    "status": "success",
+    "ip": "172.16.0.4",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "page": "shop_home"
+    },
+    "message": "User loaded shop homepage",
+    "level": "info"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:07.281Z",
+    "event": "search_query",
+    "status": "blocked",
+    "ip": "91.48.12.3",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "query": "' OR '1'='1",
+      "field": "search_input",
+      "threat_type": "sql_injection",
+      "pattern_matched": "OR bypass",
+      "action_taken": "blocked"
+    },
+    "message": "SQL INJECTION in search — \"' OR '1'='1\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:12.288Z",
+    "event": "login_attempt",
+    "status": "blocked",
+    "ip": "185.220.101.47",
+    "user": "admin'--",
+    "source": "web_app",
+    "details": {
+      "email": "admin'--",
+      "threat_type": "sql_injection",
+      "pattern_matched": "single quote / comment",
+      "auth_bypass_attempt": true,
+      "action_taken": "blocked"
+    },
+    "message": "AUTH BYPASS ATTEMPT — email: \"admin'--\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:18.286Z",
+    "event": "search_query",
+    "status": "blocked",
+    "ip": "45.33.32.156",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "query": "1 UNION SELECT * FROM users--",
+      "field": "search_input",
+      "threat_type": "sql_injection",
+      "pattern_matched": "UNION injection",
+      "action_taken": "blocked"
+    },
+    "message": "SQLi UNION attack — \"1 UNION SELECT * FROM users--\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:23.286Z",
+    "event": "login_attempt",
+    "status": "failed",
+    "ip": "185.220.101.47",
+    "user": "admin",
+    "source": "web_app",
+    "details": {
+      "reason": "invalid_credentials",
+      "attempt_number": 9
+    },
+    "message": "Login failed — repeated attempts for \"admin\"",
+    "level": "warn"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:24.286Z",
+    "event": "filter_applied",
+    "status": "blocked",
+    "ip": "91.48.12.3",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "field": "price_filter",
+      "min": "0' OR 1=1--",
+      "threat_type": "sql_injection",
+      "pattern_matched": "OR bypass",
+      "action_taken": "blocked"
+    },
+    "message": "SQLi in price filter — \"0' OR 1=1--\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:30.282Z",
+    "event": "login_attempt",
+    "status": "failed",
+    "ip": "185.220.101.47",
+    "user": "admin",
+    "source": "web_app",
+    "details": {
+      "reason": "invalid_credentials",
+      "attempt_number": 7
+    },
+    "message": "Login failed — repeated attempts for \"admin\"",
+    "level": "warn"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:43.284Z",
+    "event": "search_query",
+    "status": "blocked",
+    "ip": "91.48.12.3",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "query": "' OR '1'='1",
+      "field": "search_input",
+      "threat_type": "sql_injection",
+      "pattern_matched": "OR bypass",
+      "action_taken": "blocked"
+    },
+    "message": "SQL INJECTION in search — \"' OR '1'='1\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:48.899Z",
+    "event": "login_attempt",
+    "status": "failed",
+    "ip": "185.220.101.47",
+    "user": "admin",
+    "source": "web_app",
+    "details": {
+      "reason": "invalid_credentials",
+      "attempt_number": 6
+    },
+    "message": "Login failed — repeated attempts for \"admin\"",
+    "level": "warn"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:48.903Z",
+    "event": "search_query",
+    "status": "blocked",
+    "ip": "45.33.32.156",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "query": "1 UNION SELECT * FROM users--",
+      "field": "search_input",
+      "threat_type": "sql_injection",
+      "pattern_matched": "UNION injection",
+      "action_taken": "blocked"
+    },
+    "message": "SQLi UNION attack — \"1 UNION SELECT * FROM users--\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:48.903Z",
+    "event": "filter_applied",
+    "status": "blocked",
+    "ip": "91.48.12.3",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "field": "price_filter",
+      "min": "0' OR 1=1--",
+      "threat_type": "sql_injection",
+      "pattern_matched": "OR bypass",
+      "action_taken": "blocked"
+    },
+    "message": "SQLi in price filter — \"0' OR 1=1--\"",
+    "level": "critical"
+  },
+  {
+    "timestamp": "2026-03-23T07:11:48.899Z",
+    "event": "login_attempt",
+    "status": "failed",
+    "ip": "185.220.101.47",
+    "user": "admin",
+    "source": "web_app",
+    "details": {
+      "reason": "invalid_credentials",
+      "attempt_number": 3
+    },
+    "message": "Login failed — repeated attempts for \"admin\"",
+    "level": "warn"
+  },
+  {
+    "timestamp": "2026-03-23T07:12:03.280Z",
+    "event": "login_attempt",
+    "status": "failed",
+    "ip": "185.220.101.47",
+    "user": "admin",
+    "source": "web_app",
+    "details": {
+      "reason": "invalid_credentials",
+      "attempt_number": 9
+    },
+    "message": "Login failed — repeated attempts for \"admin\"",
+    "level": "warn"
+  },
+  {
+    "timestamp": "2026-03-23T07:12:23.279Z",
+    "event": "search_query",
+    "status": "blocked",
+    "ip": "45.33.32.156",
+    "user": "guest",
+    "source": "web_app",
+    "details": {
+      "query": "1 UNION SELECT * FROM users--",
+      "field": "search_input",
+      "threat_type": "sql_injection",
+      "pattern_matched": "UNION injection",
+      "action_taken": "blocked"
+    },
+    "message": "SQLi UNION attack — \"1 UNION SELECT * FROM users--\"",
+    "level": "critical"
+  }
+]
