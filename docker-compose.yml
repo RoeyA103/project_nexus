@@ -46,7 +46,7 @@ services:
       - PYTHONUNBUFFERED=1
       - BOOTSTRAP_SERVERS=kafka:9092
       - TOPIC_NAME=logs
-      - FILE_PATH=/app/logs/backend.ndjson # וודא שזה השם שה-Backend מייצר
+      - FILE_PATH=/app/logs/app.log # וודא שזה השם שה-Backend מייצר
     depends_on:
       kafka:
         condition: service_healthy
