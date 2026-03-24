@@ -41,7 +41,7 @@ services:
     container_name: log_shipper
     volumes:
       # חיבור לתיקיית הלוגים של ה-Backend
-      - ./web_server/backend/logs:/app/logs:ro
+      - ./web-server/backend/logs:/app/logs:ro
     environment:
       - PYTHONUNBUFFERED=1
       - BOOTSTRAP_SERVERS=kafka:9092
@@ -91,7 +91,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
+      - ./web-server/backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
     restart: always
 
   frontend:
@@ -105,7 +105,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web-server/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - frontend
       - backend
