@@ -2,21 +2,39 @@ version: '3.8'
 
 services:
   # # --- תשתית נתונים (Kafka & Elastic) ---
-  # elasticsearch:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
-  #   container_name: elasticsearch
-  #   environment:
-  #     - discovery.type=single-node
-  #     - xpack.security.enabled=false
-  #     - ES_JAVA_OPTS=-Xms512m -Xmx512m
-  #   ports:
-  #     - "9200:9200"
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "curl -s http://localhost:9200 || exit 1"]
-  #     interval: 10s
-  #     retries: 10
-  #   volumes:
-  #     - esdata:/usr/share/elasticsearch/data
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
+    container_name: elasticsearch
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+       - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "curl --fail http://localhost:9200/_cat/health?h=st | grep -E 'green|yellow'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    
 
   # kafka:
   #   image: confluentinc/cp-kafka:7.8.3
