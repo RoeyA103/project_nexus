@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: shop_db
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - "3308:3306"
+      - "3306:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
       interval: 5s
@@ -25,9 +25,12 @@ services:
       DB_USER: root
       DB_PASSWORD: password
       DB_NAME: shop_db
+
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ./backend/logs:/app/logs
     ports:
       - "4000:4000"
     restart: always

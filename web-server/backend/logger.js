@@ -22,7 +22,12 @@ export function writeLog(event, user, status, ip, details) {
 
 export function logMiddleware(req, res, next) {
   res.on("finish", () => {
-    const ip = req.headers["x-real-ip"] || req.ip || "unknown";
+    const forwarded = req.headers["x-forwarded-for"];
+    const ip =
+      forwarded?.split(",")[0].trim() ||
+      req.headers["x-real-ip"] ||
+      req.ip ||
+      "unknown";
     const user = req.session?.user?.username || "guest";
     const path = req.path;
 
