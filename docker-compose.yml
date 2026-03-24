@@ -80,7 +80,7 @@ services:
       retries: 10
 
   backend:
-    build: ./backend
+    build: ./web-server/backend
     container_name: shop_backend
     environment:
       DB_HOST: db
@@ -95,7 +95,7 @@ services:
     restart: always
 
   frontend:
-    build: ./frontend
+    build: ./web-server/frontend
     container_name: shop_frontend
     restart: always
 
