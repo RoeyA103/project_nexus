@@ -80,7 +80,7 @@ services:
       retries: 10
 
   backend:
-    build: ./backend
+    build: ./web-server/backend
     container_name: shop_backend
     environment:
       DB_HOST: db
@@ -91,11 +91,13 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
+      - ./web_server/backend/logs:/app/logs:ro
+
+#      - ./backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
     restart: always
 
   frontend:
-    build: ./frontend
+    build: ./web-server/frontend
     container_name: shop_frontend
     restart: always
 
@@ -105,7 +107,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web_server/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - frontend
       - backend
