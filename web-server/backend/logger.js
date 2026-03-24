@@ -26,7 +26,7 @@ export function logMiddleware(req, res, next) {
     const ip =
       forwarded?.split(",")[0].trim() ||
       req.headers["x-real-ip"] ||
-      req.ip ||
+      req.socket?.remoteAddress ||
       "unknown";
     const user = req.session?.user?.username || "guest";
     const path = req.path;

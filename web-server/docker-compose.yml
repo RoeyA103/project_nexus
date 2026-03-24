@@ -25,22 +25,19 @@ services:
       DB_USER: root
       DB_PASSWORD: password
       DB_NAME: shop_db
-
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - ./backend/logs:/app/logs
-    ports:
-      - "4000:4000"
+    # ✅ No ports exposed — only reachable via nginx internally
     restart: always
 
   # האתר (React/Vite)
   frontend:
     build: ./frontend
     container_name: shop_frontend
-    ports:
-      - "3000:3000"
+    # ✅ No ports exposed — only reachable via nginx internally
 
   # השומר בכניסה (Nginx)
   nginx:
