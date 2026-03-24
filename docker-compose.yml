@@ -1,71 +1,71 @@
 version: '3.8'
 
 services:
-  # --- תשתית נתונים (Kafka & Elastic) ---
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    ports:
-      - "9200:9200"
-    healthcheck:
-      test: ["CMD-SHELL", "curl -s http://localhost:9200 || exit 1"]
-      interval: 10s
-      retries: 10
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
+  # # --- תשתית נתונים (Kafka & Elastic) ---
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
+  #   container_name: elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - xpack.security.enabled=false
+  #     - ES_JAVA_OPTS=-Xms512m -Xmx512m
+  #   ports:
+  #     - "9200:9200"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -s http://localhost:9200 || exit 1"]
+  #     interval: 10s
+  #     retries: 10
+  #   volumes:
+  #     - esdata:/usr/share/elasticsearch/data
 
-  kafka:
-    image: confluentinc/cp-kafka:7.8.3
-    container_name: kafka
-    environment:
-      KAFKA_KRAFT_MODE: 'true'
-      CLUSTER_ID: '1L6g7nGhU-eAKfL--X25wo'
-      KAFKA_NODE_ID: 1
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-    healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
-      interval: 10s
-      retries: 5
+  # kafka:
+  #   image: confluentinc/cp-kafka:7.8.3
+  #   container_name: kafka
+  #   environment:
+  #     KAFKA_KRAFT_MODE: 'true'
+  #     CLUSTER_ID: '1L6g7nGhU-eAKfL--X25wo'
+  #     KAFKA_NODE_ID: 1
+  #     KAFKA_PROCESS_ROLES: broker,controller
+  #     KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+  #     KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+  #     KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+  #   healthcheck:
+  #     test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+  #     interval: 10s
+  #     retries: 5
 
   # --- שירותי הלוגים (האפליקציות שלך) ---
-  log_shipper:
-    build: ./app_logs_sender/log_shipper
-    container_name: log_shipper
-    volumes:
-      # חיבור לתיקיית הלוגים של ה-Backend
-      - ./web-server/backend/logs:/app/logs:ro
-    environment:
-      - PYTHONUNBUFFERED=1
-      - BOOTSTRAP_SERVERS=kafka:9092
-      - TOPIC_NAME=logs
-      - FILE_PATH=/app/logs/app.log # וודא שזה השם שה-Backend מייצר
-    depends_on:
-      kafka:
-        condition: service_healthy
+  # log_shipper:
+  #   build: ./app_logs_sender/log_shipper
+  #   container_name: log_shipper
+  #   volumes:
+  #     # חיבור לתיקיית הלוגים של ה-Backend
+  #     - ./web-server/backend/logs:/app/logs:ro
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     - BOOTSTRAP_SERVERS=kafka:9092
+  #     - TOPIC_NAME=logs
+  #     - FILE_PATH=/app/logs/app.log # וודא שזה השם שה-Backend מייצר
+  #   depends_on:
+  #     kafka:
+  #       condition: service_healthy
 
-  to_elastic:
-    build: ./app_logs_sender/to_elastic
-    container_name: to_elastic
-    environment:
-      - PYTHONUNBUFFERED=1
-      - BOOTSTRAP_SERVERS=kafka:9092
-      - TOPIC_NAME=logs
-      - GROUP_ID=logs_group
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - INDEX_NAME=project_logs
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+  # to_elastic:
+  #   build: ./app_logs_sender/to_elastic
+  #   container_name: to_elastic
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     - BOOTSTRAP_SERVERS=kafka:9092
+  #     - TOPIC_NAME=logs
+  #     - GROUP_ID=logs_group
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #     - INDEX_NAME=project_logs
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #     kafka:
+  #       condition: service_healthy
 
   # --- אפליקציית ה-Shop ---
   db:
@@ -78,6 +78,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
       interval: 5s
       retries: 10
+    ports:
+      - "3306:3306"
 
   backend:
     build: ./web-server/backend
@@ -93,11 +95,15 @@ services:
     volumes:
       - ./web-server/backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
     restart: always
+    ports:
+    - "4000:4000"
 
   frontend:
     build: ./web-server/frontend
     container_name: shop_frontend
     restart: always
+    ports:
+    - "3000:3000"
 
   nginx:
     image: nginx:latest
@@ -106,6 +112,7 @@ services:
       - "80:80"
     volumes:
       - ./web-server/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web-server/logs:/var/log/nginx
     depends_on:
       - frontend
       - backend
