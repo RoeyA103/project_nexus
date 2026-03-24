@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # --- תשתית נתונים (Kafka & Elastic) ---
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 || exit 1"]
+      interval: 10s
+      retries: 10
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kafka:
+    image: confluentinc/cp-kafka:7.8.3
+    container_name: kafka
+    environment:
+      KAFKA_KRAFT_MODE: 'true'
+      CLUSTER_ID: '1L6g7nGhU-eAKfL--X25wo'
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      retries: 5
+
+  # --- שירותי הלוגים (האפליקציות שלך) ---
+  log_shipper:
+    build: ./app_logs_sender/log_shipper
+    container_name: log_shipper
+    volumes:
+      # חיבור לתיקיית הלוגים של ה-Backend
+      - ./web_server/backend/logs:/app/logs:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - TOPIC_NAME=logs
+      - FILE_PATH=/app/logs/backend.ndjson # וודא שזה השם שה-Backend מייצר
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  to_elastic:
+    build: ./app_logs_sender/to_elastic
+    container_name: to_elastic
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - TOPIC_NAME=logs
+      - GROUP_ID=logs_group
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - INDEX_NAME=project_logs
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+
+  # --- אפליקציית ה-Shop ---
+  db:
+    image: mysql:8.0
+    container_name: shop_db
+    environment:
+      MYSQL_DATABASE: shop_db
+      MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: shop_backend
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: shop_db
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend/logs:/app/logs # כאן ה-Backend כותב את הלוגים
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: shop_frontend
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: shop_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  esdata:
+  kafka_kraft:

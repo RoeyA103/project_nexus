@@ -17,12 +17,11 @@ class ElasticService:
                     "ip": {"type": "ip"},
                     "details": {
                         "properties": {
-                            "method": {"type": "keyword"},
-                            "path": {"type": "keyword"},
-                            "http_status": {"type": "integer"},
-                            "response_time_ms": {"type": "float"},
                             "product_id": {"type": "integer"},
-                            "order_id": {"type": "integer"}
+                            "product_name": {"type": "text", "fields": {"keyword": {"type": "keyword"}}},
+                            "price": {"type": "float"},
+                            "category": {"type": "keyword"},
+                            "sort_by": {"type": "keyword"}
                         }
                     }
                 }
