@@ -1,0 +1,35 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: nexus-frontend
+    networks:
+      - nexus-net
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: nexus-backend
+    volumes:
+      - ./logs:/app/logs   # 👈 mount logs
+    networks:
+      - nexus-net
+
+  nginx:
+    image: nginx:latest
+    container_name: nexus-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./logs:/var/log/nginx   # 👈 nginx logs
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - nexus-net
+
+networks:
+  nexus-net:
