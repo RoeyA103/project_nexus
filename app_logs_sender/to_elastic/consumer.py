@@ -15,7 +15,6 @@ class LogConsumer:
         try:
             while True:
                 msg = self.consumer.poll(1.0)
-
                 if msg is None:
                     continue
                 if msg.error():
@@ -26,7 +25,6 @@ class LogConsumer:
                         break
 
                 self._handle_message(msg)
-
         except KeyboardInterrupt:
             print("\n[!] Consumer stopped by user.")
         finally:
@@ -41,7 +39,6 @@ class LogConsumer:
 
             if doc_id:
                 print(f"[+] Log processed: {log_data.get('event', 'unknown')} | ES_ID: {doc_id}")
-
         except Exception as e:
             print(f"[!] Error processing message: {e}")
 
