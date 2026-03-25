@@ -94,6 +94,39 @@ services:
       kafka:
         condition: service_healthy
 
+  nginx_producer_log:
+    build: ./publish
+    container_name: nginx-producer
+    environment:
+      BOOTSTRAP_SERVERS: "kafka:9092"
+      KAFKA_TOPIC_NGINX: nginx-logs
+      NGINX_LOG_PATH: /app/logs/access.log
+    volumes:
+      - ./web-server/logs:/app/logs:ro
+  
+    depends_on:
+      kafka:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+
+  nginx_consumer_log:
+    build: ./consumer
+    container_name: nginx-consumer
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      KAFKA_TOPIC_NGINX: nginx-logs
+      ES_HOST: http://elasticsearch:9200
+      ES_BATCH_SIZE: 50
+    depends_on:
+      kafka:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+
+
+
+
   # --- אפליקציית ה-Shop ---
   db:
     image: mysql:8.0
