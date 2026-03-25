@@ -79,7 +79,7 @@ services:
       - PYTHONUNBUFFERED=1
       - BOOTSTRAP_SERVERS=kafka:9092
       - TOPIC_NAME=logs
-      - GROUP_ID=logs_group
+      - GROUP_ID=logs
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       - INDEX_NAME=project_logs
     depends_on:

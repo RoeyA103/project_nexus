@@ -23,6 +23,7 @@ class JSONLogProducer:
                 value=message,
                 callback=self._delivery_report
             )
+            print("data send")
             self.producer.poll(0)
 
         except json.JSONDecodeError:

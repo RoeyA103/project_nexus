@@ -17,6 +17,7 @@ class LogConsumer:
                 msg = self.consumer.poll(1.0)
 
                 if msg is None:
+                    print("no data")
                     continue
                 if msg.error():
                     if msg.error().code() == KafkaError._PARTITION_EOF:
@@ -36,6 +37,8 @@ class LogConsumer:
         try:
             raw_value = msg.value().decode('utf-8')
             log_data = json.loads(raw_value)
+
+            print(log_data)
 
             doc_id = self.elastic_service.index_log(log_data)
 
