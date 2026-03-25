@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c3e0d57-d7c6-4114-8384-51da3d5c47e4" name="Changes" comment="" />
+    <list default="true" id="0c3e0d57-d7c6-4114-8384-51da3d5c47e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/web-server/frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-server/frontend/vite.config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +36,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "last_opened_file_path": "C:/Users/user/PycharmProjects/Kodcode/project_nexus/app_logs_sender/log_shipper",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "C:/Users/user/PycharmProjects/Kodcode/project_nexus",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
