@@ -185,7 +185,7 @@ services:
     environment:
       - VITE_ES_BASE=http://elasticsearch:9200
       - VITE_APP_INDEX=project_logs
-      - VITE_NGINX_INDEX=project_logs
+      - VITE_NGINX_INDEX=nginx-logs
       - VITE_POLL_MS=10000
     depends_on:
       elasticsearch:
