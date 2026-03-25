@@ -172,6 +172,7 @@ docker-compose up -d
 
 | Service | URL |
 |---------|-----|
+| **Website (Nginx)** | http://localhost:80 |
 | Frontend | http://localhost:3000 |
 | Backend API | http://localhost:3001 |
 | Dashboard | http://localhost:5173 |
