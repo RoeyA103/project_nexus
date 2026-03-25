@@ -143,7 +143,20 @@ services:
     depends_on:
       - frontend
       - backend
-
+  dashboard:
+    build: ./dashboard          # תיקייה עם Dockerfile + קוד ה-React
+    container_name: sec_dashboard
+    ports:
+      - "5173:5173"             # Vite dev server (or 80 if you build+nginx)
+    environment:
+      - VITE_ES_BASE=http://elasticsearch:9200
+      - VITE_APP_INDEX=project_logs
+      - VITE_NGINX_INDEX=project_logs
+      - VITE_POLL_MS=10000
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    restart: unless-stopped
 volumes:
   esdata:
   kafka_kraft:
