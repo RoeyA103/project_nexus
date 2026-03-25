@@ -94,8 +94,10 @@ services:
       kafka:
         condition: service_healthy
 
+  # --- שירותי הלוגים (nginx) ---
+
   nginx_producer_log:
-    build: ./publish
+    build: ./nginx_logs/publish
     container_name: nginx-producer
     environment:
       BOOTSTRAP_SERVERS: "kafka:9092"
@@ -111,7 +113,7 @@ services:
         condition: service_healthy
 
   nginx_consumer_log:
-    build: ./consumer
+    build: ./nginx_logs/consumer
     container_name: nginx-consumer
     environment:
       BOOTSTRAP_SERVERS: kafka:9092
@@ -123,8 +125,6 @@ services:
         condition: service_healthy
       elasticsearch:
         condition: service_healthy
-
-
 
 
   # --- אפליקציית ה-Shop ---
@@ -176,6 +176,7 @@ services:
     depends_on:
       - frontend
       - backend
+  
   dashboard:
     build: ./dashboard          # תיקייה עם Dockerfile + קוד ה-React
     container_name: sec_dashboard
@@ -190,6 +191,8 @@ services:
       elasticsearch:
         condition: service_healthy
     restart: unless-stopped
+
+
 volumes:
   esdata:
   kafka_kraft:
